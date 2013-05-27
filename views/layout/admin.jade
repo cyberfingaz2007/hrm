@@ -8,6 +8,15 @@ html
       .row-fluid
         .span12
           h1 $company
+          .navbar
+            .navbar-inner
+              ul.nav
+                li= Html::anchor('welcome/index', __('Dashboard'))
+                li= Html::anchor('#', __('Catalog'))
+                li= Html::anchor('#', __('Sales'))
+                li= Html::anchor('#', __('Reports'))
+                li= Html::anchor('#', __('Extensions'))
+                li= Html::anchor('#', __('System'))
     article.container-fluid= $content
     footer.container-fluid
       section.row-fluid
