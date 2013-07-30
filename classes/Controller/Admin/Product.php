@@ -22,6 +22,25 @@ class Controller_Admin_Product extends Controller {
         $template->content = $view;
         $this->response->body($template);
     }
+
+    public function action_view()
+    {
+        $template = new View_Jade('layout/admin');
+        $view = new View_Jade('admin/product/view');
+        
+        $product = ORM::factory('Product')
+            ->find((int) $this->request->param('id'));
+        
+        if(! $produc->loaded())
+        {
+            //TODO: error page - product not found
+        }
+        
+        $view->product = $product;
+        
+        $template->content = $view;
+        $this->response->body($template);
+    }
     
     public function action_find()
     {
