@@ -1,15 +1,18 @@
 <?php
 
 class Controller_Admin_Product extends Controller {
+
+    public $template;
+    public $user_logged;
     
     public function before()
     {
         parent::before();
         
-        $user_logged = ORM::factory('User', Session::instance()->get('user_logged'));
+        $this->user_logged = ORM::factory('User', Session::instance()->get('user_logged'));
         
         $service = new ServiceAuth();
-        $service->hasPermission($this->request, $user_logged);
+        $service->hasPermission($this->request, $this->user_logged) ? : $this->redirect('admin');
     }
 
     public function action_index()
@@ -20,7 +23,7 @@ class Controller_Admin_Product extends Controller {
         $view->products = ORM::factory('Product')->find_all();
         
         $template->content = $view;
-        $this->response->body($template);
+        $template->bind_global('user_logged', $user_logged);
     }
 
     public function action_view()
@@ -39,7 +42,6 @@ class Controller_Admin_Product extends Controller {
         $view->product = $product;
         
         $template->content = $view;
-        $this->response->body($template);
     }
     
     public function action_find()
@@ -57,7 +59,6 @@ class Controller_Admin_Product extends Controller {
         }
         
         $template->content = $view;
-        $this->response->body($template);
     }
     
     public function action_create()
@@ -76,22 +77,47 @@ class Controller_Admin_Product extends Controller {
         }
         
         $template->content = $view;
-        $this->response->body($template);
-    }
-    
-    public function action_edit()
-    {
-        
     }
     
     public function action_update()
     {
+        $template = new View_Jade('layout/admin');
+        $view = new View_Jade('admin/product/create');
         
+        if($this->request->post())
+        {
+            $product = ORM::factory('Product');
+            $product->save();
+            
+            if($product->saved())
+            {
+                $this->redirect('admin/product/index');
+            }
+        }
+        
+        $template->content = $view;
     }
     
     public function action_delete()
     {
+        if($this->request->post())
+        {
+            $product = ORM::factory('Product');
+            $product->delete();
+            
+            if($product->deleted())
+            {
+                $this->redirect('admin/product/index');
+                return;
+            }
+        }
+    }
+    
+    public function after()
+    {
+        $this->response->body($this->template);
         
+        parent::after();
     }
 
 }
