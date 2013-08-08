@@ -44,7 +44,6 @@ class Controller_Admin_Product extends Controller {
     
     public function action_find()
     {
-        $template = new View_Jade('layout/admin');
         $view = new View_Jade('admin/product/find');
         
         if($this->request->post())
@@ -62,7 +61,6 @@ class Controller_Admin_Product extends Controller {
     
     public function action_create()
     {
-        $template = new View_Jade('layout/admin');
         $view = new View_Jade('admin/product/create');
         
         if($this->request->post())
@@ -85,7 +83,6 @@ class Controller_Admin_Product extends Controller {
     
     public function action_update()
     {
-        $template = new View_Jade('layout/admin');
         $view = new View_Jade('admin/product/create');
         
         if($this->request->post())
