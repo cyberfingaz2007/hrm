@@ -23,6 +23,18 @@ class Controller_Admin_Category extends Controller {
         $template->content = $view;
     }
     
+    public function action_view()
+    {}
+    
+    public function action_find()
+    {}
+    
+    public function action_create()
+    {}
+    
+    
+    public function action_update()
+    {}
     
     public function after()
     {
