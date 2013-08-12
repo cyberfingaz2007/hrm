@@ -44,17 +44,54 @@ class Controller_Admin_Category extends Controller {
     }
     
     public function action_create()
-    {}
+    {
+        $view = new View_Jade('admin/category/create');
+        
+        if($this->request->post())
+        {
+            $category = ORM::factory('Category');
+            $category->name = $this->request->post('name');
+            $category->save();
+            if($category->saved())
+            {
+                $this->redirect('admin/category/index');
+                return;
+            }
+        }
+        
+        $template->content = $view;
+    }
     
     public function action_update()
-    {}
+    {
+        $view = new View_Jade('admin/category/create');
+        $category = ORM::factory('Category', (int) $this->request->param('id'));
+        
+        if($this->request->post())
+        {
+            $category->name = $this->request->post('name');
+            $category->slug = Url::title($this->request->post('name'));
+            $category->save();
+            
+            if($category->saved())
+            {
+                $this->redirect('admin/category/index');
+                return;
+            }
+        }
+        
+        $view->category = $category;
+        $template->content = $view;
+    }
     
     public function action_delete()
     {
         $category = ORM::factory('Category', (int) $this->request->param('id'));
+        
         if($category->loaded())
         {
             $category->delete();
+            
             if($category->deleted())
             {
                 $this->redirect('admin/category/index');
