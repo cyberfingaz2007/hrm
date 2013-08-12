@@ -20,14 +20,28 @@ class Controller_Admin_Category extends Controller {
     public function action_index()
     {
         $view = new View_Jade('admin/category/index');
+        $view->categories = ORM::factory('Category')->find_all();
         $template->content = $view;
     }
     
     public function action_view()
-    {}
+    {
+        $view = new View_Jade('admin/category/index');
+        $view->categories = ORM::factory('Category', (int) $this->request->param('id'));
+        $template->content = $view;
+    }
     
     public function action_find()
-    {}
+    {
+        $view = new View_Jade('admin/category/index');
+        $category = $this->request->post('category');
+        $categories = ORM::factory('Category')
+            ->where(DB:expr("name LIKE %{$category}%"))
+            ->find_all();
+            
+        $view->categories = $categories;
+        $template->content = $view;
+    }
     
     public function action_create()
     {}
