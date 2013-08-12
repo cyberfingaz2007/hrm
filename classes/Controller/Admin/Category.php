@@ -27,7 +27,7 @@ class Controller_Admin_Category extends Controller {
     public function action_view()
     {
         $view = new View_Jade('admin/category/index');
-        $view->categories = ORM::factory('Category', (int) $this->request->param('id'));
+        $view->category = ORM::factory('Category', (int) $this->request->param('id'));
         $template->content = $view;
     }
     
@@ -46,9 +46,21 @@ class Controller_Admin_Category extends Controller {
     public function action_create()
     {}
     
-    
     public function action_update()
     {}
+    
+    public function action_delete()
+    {
+        $category = ORM::factory('Category', (int) $this->request->param('id'));
+        if($category->loaded())
+        {
+            $category->delete();
+            if($category->deleted())
+            {
+                $this->redirect('admin/category/index');
+            }
+        }
+    }
     
     public function after()
     {
