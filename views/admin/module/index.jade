@@ -1,0 +1,5 @@
+  .row-fluid
+    .span12
+      .modules
+        - foreach($$modules as $module):
+          div Html::anchor('admin/module/install', $module)
