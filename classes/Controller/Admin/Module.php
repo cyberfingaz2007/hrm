@@ -22,6 +22,22 @@ class Controller_Admin_Module extends Controller {
         $view = new View_Jade('admin/module/index');
         
         //TODO: list all modules
+        $modules = array();
+        
+        if ($dh = opendir(MODPATH))
+        {
+             while (($file = readdir($dh)) ! in_array('.', '..')))
+             {
+                 $modules[] = $file;
+             }
+             
+             closedir($dh);
+        }
+        
+        if(count($modules))
+        {
+            $view->modules = $modules;
+        }
         
         //TODO: enable modules
         
