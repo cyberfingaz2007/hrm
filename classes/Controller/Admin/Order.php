@@ -20,6 +20,11 @@ class Controller_Admin_Order extends Controller {
     public function action_index()
     {
         $view = new View_Jade('admin/order/index');
+        
+        $view->orders = ORM::factory('Order')
+            ->order_by('datecreated', 'DESC')
+            ->find_all();
+        
         $this->template->content = $view;
     }
     
@@ -39,7 +44,7 @@ class Controller_Admin_Order extends Controller {
         $view = View_Jade::factory('admin/order/find');
         
         $orders = ORM::factory('Order')
-            ->where('datecreate', '=', $this->request->post('start'))
+            ->where('datecreated', '=', $this->request->post('start'))
             ->find_all();
         
         $view->orders = $orders;
@@ -55,7 +60,7 @@ class Controller_Admin_Order extends Controller {
         
         if($this->request->post())
         {
-            $order->user = $user_logged;
+            $order->user = $this->user_logged;
             $order->cust = $this->request->post('cust');
             $order->save();
             
@@ -78,7 +83,7 @@ class Controller_Admin_Order extends Controller {
         
         if($this->request->post())
         {
-            $order->user = $user_logged;
+            $order->user = $this->user_logged;
             $order->cust = $this->request->post('cust');
             $order->save();
             
