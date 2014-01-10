@@ -1,17 +1,13 @@
-koommerce_admin
+koommerce_resources
 ===============
 
-Admin module for Koommerce (Kohana Ecommerce)
+Human Resource Manager module for Koommerce (Kohana Ecommerce)
 
 This module is requered for Koommerce, and implement the Panel Control
 
 Manage
-* Products
-* Categories
-* Orders
-* Order items
-* Stocks
-* Tickets
-* User Accounts
-* User Control (Permissions)
-* User Preferences
+Company
+Employee
+Company Position
+Company Function
+Salary
