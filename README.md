@@ -16,4 +16,3 @@ Manage
 - Company Department (Departamento da Empresa)
 - Vacation Calendar (Calendário de Férias)
 - License Calendar (Calendário de Licenças Remuneradas e Não-Remuneradas)
-- 
