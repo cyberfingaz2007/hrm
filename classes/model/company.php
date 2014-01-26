@@ -31,5 +31,12 @@ class Model_Company extends ORM {
 			'foreign_key' => 'company_id',
 		),
 	);
+	
+	public function addAddress($address)
+	{
+		$this->address_id = $address->id;
+		
+		return $this;
+	}
 
 }
