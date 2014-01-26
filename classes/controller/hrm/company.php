@@ -29,11 +29,15 @@ class Controller_Hrm_Company extends Controller_Template {
 		
 		if($this->request->post())
 		{
+			// TODO: Move address create to model
+			$address = ORM::factory('address')
+				->values($this->request->post('address'))
+				->create();
+			
 			$company->name = $this->request->post('name');
+			$company->addAddress($address);
 			$company->save();
 		}
-		
-		
 		
 		$view = View::factory('default/hrm/company/create');
 		$view->company = $company;
