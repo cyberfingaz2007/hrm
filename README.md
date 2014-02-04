@@ -3,7 +3,7 @@ koommerce_hrm
 
 Human Resource Manager module for Koommerce (Kohana Ecommerce)
 
-This module is requered for Koommerce, and implement the Panel Control
+This module belongs to https://github.com/koommerce/koommerce
 
 Manage
 - Company (Empresa)
