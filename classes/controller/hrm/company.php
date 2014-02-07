@@ -12,6 +12,10 @@ class Controller_Hrm_Company extends Controller_Template {
 	{
 		parent::before();
 		
+		$this->page = new stdClass;
+		$this->page->title = 'Company Admin';
+		$this->page->description = '';
+		
 		$this->user_logged = Filter_Security::userLogged();
 	}
 	
@@ -31,6 +35,29 @@ class Controller_Hrm_Company extends Controller_Template {
 	public function action_create()
 	{
 		$company = ORM::factory('company');
+		
+		if($this->request->post())
+		{
+			// TODO: Move address create to model
+			$address = ORM::factory('address')
+				->values($this->request->post('address'))
+				->create();
+			
+			$company->name = $this->request->post('name');
+			$company->addAddress($address);
+			$company->save();
+		}
+		
+		$view = View::factory('default/hrm/company/create');
+		$view->company = $company;
+		
+		$this->render(array('json' => $company, 'html' => $view));
+	}
+	
+	public function action_update()
+	{
+		$company = ORM::factory('company')
+			->save();
 		
 		if($this->request->post())
 		{
