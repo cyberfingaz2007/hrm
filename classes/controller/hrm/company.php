@@ -6,6 +6,8 @@ class Controller_Hrm_Company extends Controller_Template {
 	
 	public $user_logged;
 	
+	public $page;
+	
 	public function before()
 	{
 		parent::before();
@@ -16,11 +18,14 @@ class Controller_Hrm_Company extends Controller_Template {
 	public function action_index()
 	{
 		// TODO: list companies User is employeeds
-		$companies = ORM::factory('company')->find_all();
+		$companies = ORM::factory('company')
+			->where('user_id', '=', $this->user_logged->id)
+			->find_all();
 		
 		$view = View::factory('default/hrm/company/index');
 		$view->companies = $companies;
-		$this->template->content = $view;
+		
+		$this->render(array('json' => $companies, 'html' => $view));
 	}
 	
 	public function action_create()
@@ -41,7 +46,13 @@ class Controller_Hrm_Company extends Controller_Template {
 		
 		$view = View::factory('default/hrm/company/create');
 		$view->company = $company;
-		$this->template->content = $view;
+		
+		$this->render(array('json' => $company, 'html' => $view));
+	}
+	
+	public function after()
+	{
+		parent::after();
 	}
 
 }
