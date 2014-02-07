@@ -9,6 +9,7 @@ Manage
 - Company (Empresa)
 - Company Unit (Filiais)
 - Company Department (Departamento da Empresa)
+- People (Dados pessoais)
 - Employer (Empregador)
 - Employee (Empregado)
 - Company Position (Cargo)
@@ -20,3 +21,7 @@ Manage
 - Performance Appraisal (Avaliação de Desempenho do Empregado)
 - Training (Treinamentos)
 - Selection (Vagas de Trabalho)
+- Curriculum (Curriculo)
+- Degree (Escolarização)
+- Course (Cursos)
+- Professional Experience
