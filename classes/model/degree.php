@@ -17,8 +17,8 @@ class Model_Deegre extends ORM {
 	 public $_has_one = array();
 	 
 	 public $_has_many = array(
-	 	'curriculums' => array(
-	 		'model' => 'curriculum',
+	 	'curriculum_degrees' => array(
+	 		'model' => 'curriculum_degree',
 	 		'foreign_key' => 'degree_id'
 	 	),
 	 );
