@@ -1,6 +1,6 @@
 <?php
 
-class Model_Curriculum_Deegre extends ORM {
+class Model_Deegre extends ORM {
 
 	/**
 	 * @var Long $id not null autoincrement primary key
@@ -8,7 +8,7 @@ class Model_Curriculum_Deegre extends ORM {
 	 */
 	 
 	 // Table description
-	 public $_table_name = 'curriculum_degree';
+	 public $_table_name = 'degree';
 	 public $_table_name_plural = false;
 	 public $_primary_key = 'id';
 	 
@@ -19,7 +19,7 @@ class Model_Curriculum_Deegre extends ORM {
 	 public $_has_many = array(
 	 	'curriculums' => array(
 	 		'model' => 'curriculum',
-	 		'foreign_key' => 'curriculum_degree_id'
+	 		'foreign_key' => 'degree_id'
 	 	),
 	 );
 
