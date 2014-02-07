@@ -12,7 +12,13 @@ class Model_Curriculum extends ORM {
 	public $_primary_key = 'id';
 
 	public $_belongs_to = array();
+	
 	public $_has_one = array();
-	public $_has_many = array();
+	public $_has_many = array(
+		'degree' => array(
+			'model' => 'degree',
+			'through' => 'curriculum_degree'
+		),	
+	);
 
 }
