@@ -32,6 +32,20 @@ class Controller_Hrm_Company extends Controller_Template {
 		$this->render(array('json' => $companies, 'html' => $view));
 	}
 	
+	public function action_find()
+	{
+		// TODO: list companies User is employeeds
+		$companies = ORM::factory('company')
+			->where('user_id', '=', $this->user_logged->id)
+			->and_where('name', 'LIKE', "%{$this->request->get('name')}%")
+			->find_all();
+		
+		$view = View::factory('default/hrm/company/find');
+		$view->companies = $companies;
+		
+		$this->render(array('json' => $companies, 'html' => $view));
+	}
+	
 	public function action_create()
 	{
 		$company = ORM::factory('company');
